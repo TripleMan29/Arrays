@@ -9,27 +9,24 @@ public class Homework {
     }
 
     static int[] search(int[] arr){
-        int[] maxSumArr = new int[arr.length];
-  //      int[] indexArr = new int[arr.length];
-        int[] timeArray = new int[arr.length];
+        int[] maxSumArr = new int[0];
+        int[] timeArray = new int[0];
 
         int summa = 0;
 
-        for (int i = 0; i < arr.length; i++){
+        for (int i : arr){
 
-            summa += arr[i];
+            summa += i;
 
             if (summa <= 0){
                 summa = 0;
-           //     indexArr = new int[arr.length - i];
-                timeArray = new int[arr.length];
+                timeArray = new int[0];
             }
-            else
-                timeArray[i] = arr[i];
-     //           indexArr[i] = i;
-            if (allSum(maxSumArr) < allSum(timeArray)) {
-                for (int j = 0; j < maxSumArr.length; j++) maxSumArr[j] = timeArray[j];
+            else {
+                timeArray = Arrays.copyOf(timeArray, timeArray.length + 1);
+                timeArray[timeArray.length - 1] = i;
             }
+            if (allSum(maxSumArr) < allSum(timeArray)) maxSumArr = Arrays.copyOf(timeArray, timeArray.length);
         }
         return maxSumArr;
     }
@@ -41,23 +38,4 @@ public class Homework {
         }
         return sum;
     }
-  /*  public static int[] deviding(int[] arr){
-        int halfSize = arr.length/2;
-        int[] fisrtArray = new int[halfSize];
-        int[] secondArray = new int[arr.length - halfSize];
-
-        for(int i = 0; i < halfSize; i++){
-            fisrtArray[i] = arr[i];
-        }
-
-        if (fisrtArray.length < 3) deviding(fisrtArray);
-
-
-        for (int i = halfSize; i < arr.length; i++){
-            secondArray[i] = arr[i];
-        }
-
-        if (secondArray.length < 3) deviding(secondArray);
-
-    }*/
 }
