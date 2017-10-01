@@ -9,33 +9,28 @@ public class Homework {
     }
 
     static int[] search(int[] arr){
-        int[] maxSumArr = new int[0];
-        int[] timeArray = new int[0];
+        int timeIndex = 0;
+        int firstIndex = 0;
+        int secondIndex = -1;
 
         int summa = 0;
 
-        for (int i : arr){
+        int maxSumma = 0;
 
-            summa += i;
+        for (int i = 0; i < arr.length; i++){
+
+            summa += arr[i];
 
             if (summa <= 0){
                 summa = 0;
-                timeArray = new int[0];
+                timeIndex = i + 1;
             }
-            else {
-                timeArray = Arrays.copyOf(timeArray, timeArray.length + 1);
-                timeArray[timeArray.length - 1] = i;
+            else if (summa > maxSumma){
+                maxSumma = summa;
+                firstIndex = timeIndex;
+                secondIndex = i;
             }
-            if (allSum(maxSumArr) < allSum(timeArray)) maxSumArr = Arrays.copyOf(timeArray, timeArray.length);
         }
-        return maxSumArr;
-    }
-
-    static int allSum(int[] array){
-        int sum = 0;
-        for (int i : array){
-            sum += i;
-        }
-        return sum;
+        return Arrays.copyOfRange(arr, firstIndex, secondIndex + 1);
     }
 }
